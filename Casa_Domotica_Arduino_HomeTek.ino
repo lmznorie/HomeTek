@@ -1,12 +1,13 @@
 /*
-VERSION FINAL; 18 MARZO DEL 2013; 4.01 P.M.
-VERSION 2.0 [AGREGADO ALARMA, PUERTON, Y LUZ AUTOMATICA] 25 DE MARZO DEL 2013; 11.25 A.M.
+VERSION 1.0 [AGREGADO ALARMA, PUERTON, Y LUZ AUTOMATICA] 25 DE MARZO DEL 2013; 07/11/2018 12:00 m
 */
 
 //Incluir las siguientes librerías: 
 
-#include <IRremote.h> //Librería para el receptor infrarrojo (IR)
 #include <Servo.h> //Librería para los servomotores 
+#include <SoftwareSerial.h> /*Librería para bluetooth. PIN de conexión en arduino RX = 0 TX = 1 
+del BT son 0 , recordar q el TX del modulo debe conectarse al RX del arduino y el viceversa*/
+int estado=0;
 
 //Declaración de variables y asignación de pines
 
@@ -33,13 +34,6 @@ int Lampara2 = 7;
 int Alarma = 12;
 
 
-//Señal del receptor infrarrojo (IR) [INICIO]
-int CIR = 9;
-IRrecv irrecv(CIR);
-decode_results valorIR;
-long int codir; //Variable para almacenar el código leído por el receptor infrarrojo (IR)
-//Señal del receptor infrarrojo (IR) [FIN]
-
 Servo SerAuto;
 Servo SerPuerta;
 
@@ -52,45 +46,16 @@ int tnota=100;
 int pausa=100; 
 //Alarma [FIN]
 
-//Códigos, control remoto Samsung 31T-016 INICIO
-long int CSPOWER =4105841032;
-long int CSPMODE =3135877228;
-long int CSSMODE =2618744002;
-long int CSTVVIDEO =3459683302;
-long int CSUNO =3778927144;
-long int CSDOS =2908251746;
-long int CSTRES =657459652;
-long int CSCUATRO =4120482440;
-long int CSCINCO =1931099650;
-long int CSSEIS =742730860;
-long int CSSIETE =1167253836;
-long int CSOCHO =1747313982;
-long int CSNUEVE =2340753640;
-long int CSCERO =3119867746;
-long int CSCHSCAN =2479124606;
-long int CSSLEEP =1441014914;
-long int CSADDDEL =3248603014;
-long int CSSURROUND =551334792;
-long int CSZOOM =158659426;
-long int CSSURF =2424074206;
-long int CSMTS =1150532780;
-long int CSPSIZE =2308325960;
-long int CSTURBO =538772752;
-long int CSDISPLAY =1908947622;
-long int CSMUTE =591444258;
-long int CSMENU =1723810024;
-long int CSCHMAS =1595074756;
-long int CSCHMENOS =412973352;
-long int CSVOLMAS =1752382022;
-long int CSVOLMENOS =2209452902;
-long int CSPRECH =3398220998;
-//Códigos, control remoto Samsung 31T-016 FIN
 
 void setup(){   
   
-  Serial.begin(9600); //Abrie el puerto serie a una velocidad de 9600 bps
-   irrecv.enableIRIn(); //Inicio del receptor infrarrojo (IR)
+  //Inicializando BT  
+  Serial.begin(9600);  
+  // put your setup code here, to run once:  
+  pinMode (PIR_IN,INPUT);
   
+  
+  /*codigo original
   pinMode(Elevador1, OUTPUT);
   pinMode(Elevador2, OUTPUT);
   pinMode(LuzSala, OUTPUT);
@@ -103,7 +68,7 @@ void setup(){
  
   SerAuto.attach(A4); 
   SerPuerta.attach(A5); 
-  
+  */
 
   
 } //Fin del void setup
