@@ -15,6 +15,18 @@
 *.so
 *.dylib
 *.dll
+*.so.*
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Linker output
+*.ilk
+*.map
+*.exp
 
 # Fortran module files
 *.mod
@@ -30,3 +42,18 @@
 *.exe
 *.out
 *.app
+*.i*86
+*.x86_64
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.hex
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
